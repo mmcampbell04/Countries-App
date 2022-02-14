@@ -12,7 +12,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [regionFilter, setRegionFilter] = useState("");
   const [countrySearch, setCountrySearch] = useState("");
-
+  const [countryData, setCountryData] = useState(dummyCountries);
   // selectedregion state for dropdown
 
   const themeToggler = () => {
@@ -28,14 +28,14 @@ function App() {
     toggleDropdown();
   }
 
-  console.log(regionFilter);
+  // console.log(regionFilter);
 
   function filterCountries(e) {
     let country = e.target.value.toLowerCase();
     setCountrySearch(country);
   }
 
-  console.log(countrySearch);
+  // console.log(countrySearch);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -48,10 +48,148 @@ function App() {
           getRegion={getRegion}
           filterCountries={filterCountries}
         />
-        <Cards />
+        <Cards countryData={countryData} />
       </Grid>
     </ThemeProvider>
   );
 }
 
 export default App;
+
+const dummyCountries = [
+  {
+    name: "Colombia",
+    capital: "Bogotá",
+    region: "South America",
+    continent: "Americas",
+    population: 48759958,
+    timezones: ["UTC-05:00"],
+    borders: ["BRA", "ECU", "PAN", "PER", "VEN"],
+    numericCode: "170",
+    currencies: [
+      {
+        code: "COP",
+        name: "Colombian peso",
+        symbol: "$",
+      },
+    ],
+    languages: [
+      {
+        iso639_1: "es",
+        iso639_2: "spa",
+        name: "Spanish",
+        nativeName: "Español",
+      },
+    ],
+
+    flags: "https://countries.petethompson.net/data/flags/col.svg",
+  },
+  {
+    name: "Colombia",
+    capital: "Bogotá",
+    region: "South America",
+    continent: "Americas",
+    population: 48759958,
+    timezones: ["UTC-05:00"],
+    borders: ["BRA", "ECU", "PAN", "PER", "VEN"],
+    numericCode: "170",
+    currencies: [
+      {
+        code: "COP",
+        name: "Colombian peso",
+        symbol: "$",
+      },
+    ],
+    languages: [
+      {
+        iso639_1: "es",
+        iso639_2: "spa",
+        name: "Spanish",
+        nativeName: "Español",
+      },
+    ],
+
+    flags: "https://countries.petethompson.net/data/flags/col.svg",
+  },
+  {
+    name: "Colombia",
+    capital: "Bogotá",
+    region: "South America",
+    continent: "Americas",
+    population: 48759958,
+    timezones: ["UTC-05:00"],
+    borders: ["BRA", "ECU", "PAN", "PER", "VEN"],
+    numericCode: "170",
+    currencies: [
+      {
+        code: "COP",
+        name: "Colombian peso",
+        symbol: "$",
+      },
+    ],
+    languages: [
+      {
+        iso639_1: "es",
+        iso639_2: "spa",
+        name: "Spanish",
+        nativeName: "Español",
+      },
+    ],
+
+    flags: "https://countries.petethompson.net/data/flags/col.svg",
+  },
+  {
+    name: "Colombia",
+    capital: "Bogotá",
+    region: "South America",
+    continent: "Americas",
+    population: 48759958,
+    timezones: ["UTC-05:00"],
+    borders: ["BRA", "ECU", "PAN", "PER", "VEN"],
+    numericCode: "170",
+    currencies: [
+      {
+        code: "COP",
+        name: "Colombian peso",
+        symbol: "$",
+      },
+    ],
+    languages: [
+      {
+        iso639_1: "es",
+        iso639_2: "spa",
+        name: "Spanish",
+        nativeName: "Español",
+      },
+    ],
+
+    flags: "https://countries.petethompson.net/data/flags/col.svg",
+  },
+  {
+    name: "Colombia",
+    capital: "Bogotá",
+    region: "South America",
+    continent: "Americas",
+    population: 48759958,
+    timezones: ["UTC-05:00"],
+    borders: ["BRA", "ECU", "PAN", "PER", "VEN"],
+    numericCode: "170",
+    currencies: [
+      {
+        code: "COP",
+        name: "Colombian peso",
+        symbol: "$",
+      },
+    ],
+    languages: [
+      {
+        iso639_1: "es",
+        iso639_2: "spa",
+        name: "Spanish",
+        nativeName: "Español",
+      },
+    ],
+
+    flags: "https://countries.petethompson.net/data/flags/col.svg",
+  },
+];
