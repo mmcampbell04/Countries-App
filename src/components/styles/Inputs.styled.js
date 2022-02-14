@@ -1,37 +1,72 @@
 import styled from "styled-components";
+import { Device } from "./Device";
 
 export const StyledInputs = styled.section`
   grid-column: 2 / -2;
-  padding-block: 2em;
+  margin-top: 1.5em;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  @media ${Device.tablet} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
-export const InputWrapper = styled.div``;
-
-export const SearchBar = styled.input``;
-
-export const DropdownContainer = styled.div`
-  width: 10.5em;
-  cursor: pointer;
-`;
-
-export const DropdownHeader = styled.div`
-  background-color: ${({ theme }) => theme.accentColor};
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.8em;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  font-weight: 500;
+export const InputWrapper = styled.div`
+  max-width: 25em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.5em 1em;
+  padding: 1em 1.75em;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.accentColor};
+  color: ${({ theme }) => theme.textColor};
+  font-size: 0.75rem;
+  font-weight: 500;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 15%);
+
+  &:focus-within {
+    outline: 3px dotted green;
+  }
 `;
+
+export const SearchBar = styled.input`
+  border: none;
+  width: 100%;
+  margin-left: 1em;
+  background-color: ${({ theme }) => theme.accentColor};
+  color: ${({ theme }) => theme.textColor};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.textColor};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const DropdownContainer = styled.div`
+  margin-top: 2em;
+  width: 10.5em;
+  cursor: pointer;
+
+  @media ${Device.tablet} {
+    margin-top: 0;
+  }
+`;
+
+export const DropdownHeader = styled(InputWrapper)`
+  width: 100%;
+  justify-content: space-between;
+`;
+
 export const DropdownListContainer = styled.div`
   width: 10.5em;
   position: absolute;
   z-index: 1000;
+  margin-top: 0.5em;
 `;
 
 export const DropdownList = styled.ul`
@@ -40,6 +75,7 @@ export const DropdownList = styled.ul`
 `;
 export const ListItem = styled.li`
   font-weight: 300;
+  font-size: 0.75rem;
   padding: 0.5em 1em;
 
   &:not(:first-of-type) {

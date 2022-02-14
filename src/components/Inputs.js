@@ -9,16 +9,22 @@ import {
   ListItem,
 } from "./styles/Inputs.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
-export default function Inputs({ isOpen, toggleDropdown }) {
-  // array of dropdown options & map over the array returning an Listitem
-
+export default function Inputs({
+  isOpen,
+  toggleDropdown,
+  getRegion,
+  filterCountries,
+}) {
   const regionArray = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
-  let regions = regionArray.map((region, index) => {
+  let regions = regionArray.map((region) => {
     return (
-      <ListItem key={index} value={region}>
+      <ListItem key={region} onClick={getRegion}>
         {region}
       </ListItem>
     );
@@ -27,14 +33,20 @@ export default function Inputs({ isOpen, toggleDropdown }) {
   return (
     <StyledInputs>
       <InputWrapper>
-        <SearchBar type="search" placeholder="Search for a country..." />
+        <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
+        <SearchBar
+          onChange={filterCountries}
+          type="search"
+          placeholder="Search for a country..."
+        />
       </InputWrapper>
       <DropdownContainer>
         <DropdownHeader onClick={toggleDropdown}>
           Filter by Region
           <FontAwesomeIcon
             icon={faAngleDown}
-            rotation={`${isOpen ? 180 : ""}`}
+            rotation={isOpen ? 180 : 0}
+            size="sm"
           />
         </DropdownHeader>
 
