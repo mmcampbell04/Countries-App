@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Device } from "./Device";
 
 export const StyledHeader = styled.header`
   color: ${({ theme }) => theme.textColor};
@@ -6,6 +7,7 @@ export const StyledHeader = styled.header`
 
   h1 {
     font-weight: 800;
+    font-size: 1rem;
   }
 `;
 
@@ -25,6 +27,7 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   padding: 5px;
   cursor: pointer;
+  font-size: 0.75rem;
 `;
 
 export const Checkbox = styled.input`
