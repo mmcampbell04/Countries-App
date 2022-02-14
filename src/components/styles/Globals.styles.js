@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.background};
     font-family: "Nunito Sans", sans-serif;
     font-size: 100%;
+    color: ${({ theme }) => theme.textColor};
     width: 100%;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -23,6 +24,10 @@ const GlobalStyles = createGlobalStyle`
 a {
   text-decoration: none;
   color: inherit;
+}
+
+ul, li {
+  list-style: none;
 }
 
 /* Make images easier to work with */
