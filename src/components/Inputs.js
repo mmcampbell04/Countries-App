@@ -18,7 +18,8 @@ export default function Inputs({
   isOpen,
   toggleDropdown,
   getRegion,
-  filterCountries,
+  onSearchChange,
+  region,
 }) {
   const regionArray = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
@@ -33,16 +34,18 @@ export default function Inputs({
   return (
     <StyledInputs>
       <InputWrapper>
-        <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
         <SearchBar
-          onChange={filterCountries}
+          onChange={onSearchChange}
           type="search"
           placeholder="Search for a country..."
         />
       </InputWrapper>
       <DropdownContainer>
         <DropdownHeader onClick={toggleDropdown}>
-          Filter by Region
+          {/* {`${region}`.charAt(0).toUpperCase() + `${region}`.slice(1) ||
+            "Filter by Region"} */}
+          Filter
           <FontAwesomeIcon
             icon={faAngleDown}
             rotation={isOpen ? 180 : 0}
