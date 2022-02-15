@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./components/themes";
 import GlobalStyles from "./components/styles/Globals.styles";
@@ -12,30 +12,57 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [regionFilter, setRegionFilter] = useState("");
   const [countrySearch, setCountrySearch] = useState("");
-  const [countryData, setCountryData] = useState(dummyCountries);
+  const [countryData, setCountryData] = useState([]);
   // selectedregion state for dropdown
 
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all")
+      .then((res) => res.json())
+      .then((results) => {
+        setCountryData(
+          results.map((country) => {
+            return {
+              id: country.name.common,
+              name: country.name.common,
+              nativeName: country.name.nativeName,
+              population: country.population,
+              flag: country.flags.svg,
+              region: country.region,
+              subRegion: country.subregion,
+              capital: country.capital,
+              domain: country.tld,
+              currencies: country.currencies,
+              languages: country.languages,
+              borderCountries: country.borders,
+            };
+          })
+        );
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }, []);
+
+  // toggle dropdown filter options
   function toggleDropdown() {
     setIsOpen((isOpen) => !isOpen);
   }
 
+  // filter by region
   function getRegion(e) {
     setRegionFilter(e.target.innerText);
     toggleDropdown();
   }
 
-  // console.log(regionFilter);
-
+  //  search for country
   function filterCountries(e) {
     let country = e.target.value.toLowerCase();
     setCountrySearch(country);
   }
-
-  // console.log(countrySearch);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>

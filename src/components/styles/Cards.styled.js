@@ -21,6 +21,9 @@ export const Card = styled.div`
 `;
 
 export const CountryFlag = styled.img`
+  width: 100%;
+  aspect-ratio: 1 / 0.7;
+  object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;
