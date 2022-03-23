@@ -10,10 +10,18 @@ import {
   CountryDetails,
 } from "./styles/CountriesList.styled";
 
-export default function CountriesList() {
-  const { showCurrentCards } = useContext(Context);
+export default function CountriesList({ currentCards }) {
+  const { isLoading } = useContext(Context);
 
-  const countries = showCurrentCards.map((country) => {
+  const Loader = () => {
+    if (isLoading) {
+      return <h2>Content Loading!</h2>;
+    } else {
+      return null;
+    }
+  };
+
+  const countries = currentCards.map((country) => {
     return (
       <Card key={country.id}>
         <Link to={`details/${country.name}`}>
@@ -42,9 +50,8 @@ export default function CountriesList() {
 
   return (
     <CardsContainer>
-      {/* {loading && <h2>Loading...</h2>} */}
-
-      {countries}
+      <Loader />
+      {countries.length === 0 ? "No match!" : countries}
     </CardsContainer>
   );
 }
