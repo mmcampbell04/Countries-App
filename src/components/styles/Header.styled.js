@@ -1,33 +1,34 @@
 import styled from "styled-components";
-import { Device } from "./Device";
+import { Grid } from "./Layouts.styled";
+// import { Device } from "./Device";
 
 export const StyledHeader = styled.header`
+  ${Grid}
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.accentColor};
 
   h1 {
     font-weight: 800;
-    font-size: 1rem;
+    font-size: clamp(1rem, 75% + 12px, 3rem);
   }
 `;
 
-export const Nav = styled.nav`
+export const HeaderWrapper = styled.div`
   grid-column: 2/-2;
-  padding-block: 1em;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-block: 1em;
 `;
 
 export const CheckboxLabel = styled.label`
-  height: 2.5rem;
   width: 7em;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: clamp(0.875rem, 50% + 4px, 1rem);
 `;
 
 export const Checkbox = styled.input`
