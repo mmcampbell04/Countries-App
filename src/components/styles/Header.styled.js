@@ -6,6 +6,8 @@ export const StyledHeader = styled.header`
   ${Grid}
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.accentColor};
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 15%);
+  -webkit-box-shadow: 1px 1px 4px rgb(0 0 0 / 15%);
 
   h1 {
     font-weight: 800;
