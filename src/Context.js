@@ -37,10 +37,15 @@ function ContextProvider({ children }) {
     fetchCountries();
   }, []);
 
+  function currentCountryDetails(name) {
+    return countryData.find((country) => country.name === name);
+  }
+
   return (
     <Context.Provider
       value={{
         countryData,
+        currentCountryDetails,
         isLoading,
       }}
     >
