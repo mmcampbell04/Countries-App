@@ -9,13 +9,13 @@ const GlobalStyles = createGlobalStyle`
 
   
   body {
+    width: 100%;
     background: ${({ theme }) => theme.background};
     font-family: "Nunito Sans", sans-serif;
     font-size: 100%;
     color: ${({ theme }) => theme.textColor};
-    width: 100%;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
     
   }
 

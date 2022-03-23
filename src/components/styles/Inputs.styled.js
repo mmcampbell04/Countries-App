@@ -8,6 +8,7 @@ export const StyledInputs = styled.section`
   flex-direction: column;
 
   @media ${Device.tablet} {
+    margin-block: 3.5em;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -22,7 +23,7 @@ export const InputWrapper = styled.div`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.accentColor};
   color: ${({ theme }) => theme.textColor};
-  font-size: 0.75rem;
+  font-size: clamp(0.875rem, 50% + 4px, 1rem)
   font-weight: 500;
   box-shadow: 1px 1px 4px rgb(0 0 0 / 15%);
 
@@ -49,7 +50,7 @@ export const SearchBar = styled.input`
 
 export const DropdownContainer = styled.div`
   margin-top: 2em;
-  width: 10.5em;
+  width: 13em;
   cursor: pointer;
 
   @media ${Device.tablet} {
@@ -63,7 +64,7 @@ export const DropdownHeader = styled(InputWrapper)`
 `;
 
 export const DropdownListContainer = styled.div`
-  width: 10.5em;
+  width: 13em;
   position: absolute;
   z-index: 1000;
   margin-top: 0.5em;
@@ -75,7 +76,7 @@ export const DropdownList = styled.ul`
 `;
 export const ListItem = styled.li`
   font-weight: 300;
-  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 50% + 8px, 1rem);
   padding: 0.5em 1em;
 
   &:not(:first-of-type) {
