@@ -8,15 +8,19 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { Context } from "../Context";
 
-export default function Pagination({
-  cardsPerPage,
-  totalCards,
-  flipPages,
-  currentPage,
+export default function Pagination(
   togglePreviousPage,
   toggleNextPage,
-}) {
+  flipPages,
+  currentPage,
+  cardsPerPage,
+  totalCards
+) {
+  // const { countryData } = useContext(Context);
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalCards / cardsPerPage); i++) {
     pageNumbers.push(i);
