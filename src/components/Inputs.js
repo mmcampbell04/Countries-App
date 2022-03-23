@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   StyledInputs,
   InputWrapper,
@@ -14,22 +16,42 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Inputs({
-  isOpen,
-  toggleDropdown,
-  getRegion,
-  onSearchChange,
-  region,
-}) {
-  const regionArray = ["Africa", "America", "Asia", "Europe", "Oceania"];
+export default function Inputs({ getRegion, resetRegion, onSearchChange }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [headerText, setHeaderText] = useState("Filter by Region");
+
+  const regionArray = [
+    "All",
+    "Africa",
+    "Americas",
+    "Asia",
+    "Europe",
+    "Oceania",
+  ];
 
   let regions = regionArray.map((region) => {
     return (
-      <ListItem key={region} onClick={getRegion}>
+      <ListItem key={region} onClick={getUserChoice}>
         {region}
       </ListItem>
     );
   });
+
+  function getUserChoice(event) {
+    const chosenContinent = event.target.innerText;
+    if (chosenContinent === "All") {
+      getRegion("");
+    } else {
+      getRegion(chosenContinent);
+    }
+    setHeaderText(chosenContinent);
+    setIsDropdownOpen(false);
+  }
+
+  // open dropdown
+  function toggleDropdown() {
+    setIsDropdownOpen((prevState) => !prevState);
+  }
 
   return (
     <StyledInputs>
@@ -43,17 +65,15 @@ export default function Inputs({
       </InputWrapper>
       <DropdownContainer>
         <DropdownHeader onClick={toggleDropdown}>
-          {/* {`${region}`.charAt(0).toUpperCase() + `${region}`.slice(1) ||
-            "Filter by Region"} */}
-          Filter
+          {headerText}
           <FontAwesomeIcon
             icon={faAngleDown}
-            rotation={isOpen ? 180 : 0}
+            rotation={isDropdownOpen ? 180 : 0}
             size="sm"
           />
         </DropdownHeader>
 
-        {isOpen && (
+        {isDropdownOpen && (
           <DropdownListContainer>
             <DropdownList>{regions}</DropdownList>
           </DropdownListContainer>
