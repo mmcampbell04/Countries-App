@@ -17,6 +17,7 @@ function ContextProvider({ children }) {
           .map((country) => {
             return {
               id: country.name.common,
+              countryCode: country.cca3,
               name: country.name.common,
               nativeName: country.name.nativeName,
               population: country.population,
@@ -41,12 +42,21 @@ function ContextProvider({ children }) {
     return countryData.find((country) => country.name === name);
   }
 
+  function matchCountryCode(code) {
+    // look through country data and find the coutnry
+    // that matches the country code and then return the country name
+    return countryData
+      .filter((country) => country.countryCode === code)
+      .map((country) => country.name);
+  }
+
   return (
     <Context.Provider
       value={{
         countryData,
         currentCountryDetails,
         isLoading,
+        matchCountryCode,
       }}
     >
       {children}

@@ -11,26 +11,62 @@ import {
   CountryFacts,
   PrimaryButton,
   StyledCountryCard,
+  BtnsWrapper,
   Btns,
   SubSection,
 } from "../components/styles/Details.styled";
 
 export default function Details() {
-  const { currentCountryDetails } = useContext(Context);
+  const { currentCountryDetails, matchCountryCode } = useContext(Context);
   let params = useParams();
   let country = currentCountryDetails(params.countryName);
 
   // filter down for more specific details: native name, currencies, language, border countries (thank you stackoverflow!)
-  const currenciesArray = Object.values(country.currencies);
-  const nativeNameArray = Object.values(country.nativeName); // fix this so each word is capitalized
-  const languagesArray = Object.values(country.languages); // fix this so its seperated by commas
-  // const borderCountryArray = Object.values(country.borderCountries);
+  const getCurrencies = () => {
+    if (!country.currencies) {
+      return "none";
+    } else {
+      const currenciesArray = Object.values(country.currencies);
+      return String(currenciesArray[0].name)
+        .split(" ")
+        .map((word) => {
+          return word[0].toUpperCase() + word.substring(1);
+        })
+        .join(" ");
+    }
+  };
 
-  // const borderCountryBtns = borderCountryArray.map((country) => {
-  //   return <PrimaryButton key={country}>{country}</PrimaryButton>;
-  // });
+  const getNativeName = () => {
+    if (!country.nativeName) {
+      return country.name;
+    } else {
+      let nameArray = Object.values(country.nativeName);
+      return nameArray[0].common;
+    }
+  };
 
-  // if there are no border countries, render "none"
+  const getLanguages = () => {
+    if (!country.languages) {
+      return "none";
+    } else {
+      const languagesArray = Object.values(country.languages);
+      return languagesArray.toString().replace(/,(?=[^\s])/g, ", ");
+    }
+  };
+
+  // can i do this when i first get the data...?
+  const borderCountryArray = !country.borderCountries
+    ? ""
+    : Object.values(country.borderCountries).map((country) => {
+        return matchCountryCode(country);
+      });
+
+  const borderCountryBtns =
+    borderCountryArray === ""
+      ? ""
+      : borderCountryArray.map((country) => {
+          return <PrimaryButton key={country}>{country}</PrimaryButton>;
+        });
 
   return (
     <Main>
@@ -50,7 +86,7 @@ export default function Details() {
             <SubSection>
               <p>
                 <strong>Native Name: </strong>
-                {nativeNameArray[0].common}
+                {getNativeName()}
               </p>
               <p>
                 <strong>Population: </strong>
@@ -76,17 +112,20 @@ export default function Details() {
               </p>
               <p>
                 <strong>Currencies: </strong>
-                {currenciesArray[0].name}
+                {getCurrencies()}
               </p>
               <p>
                 <strong>Languages: </strong>
-                {languagesArray}
+                {getLanguages()}
               </p>
             </SubSection>
-            <Btns>
-              <strong>Border Countries: </strong>
-              {/* {borderCountryBtns} */}
-            </Btns>
+            <BtnsWrapper>
+              <p>
+                <strong>Border Countries: </strong>
+              </p>
+
+              <Btns>{borderCountryBtns}</Btns>
+            </BtnsWrapper>
           </CountryFacts>
         </StyledCountryCard>
       </CountriesSection>
