@@ -11,7 +11,7 @@ export const StyledHeader = styled.header`
 
   h1 {
     font-weight: 800;
-    font-size: clamp(1rem, 75% + 12px, 3rem);
+    font-size: clamp(1rem, 20% + 12px, 3rem);
   }
 `;
 
@@ -30,7 +30,7 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   padding: 5px;
   cursor: pointer;
-  font-size: clamp(0.875rem, 50% + 4px, 1rem);
+  font-size: clamp(0.75rem, 20% + 4px, 1rem);
 `;
 
 export const Checkbox = styled.input`
