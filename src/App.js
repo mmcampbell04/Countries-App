@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route path="/home/:pageNumber" />
         </Route>
-        <Route path="/details/:countryName" element={<Details />} />
+        <Route path="/details/:name" element={<Details />} />
         <Route path="*" element={<p>There's nothing here!</p>} />
       </Routes>
     </ThemeProvider>

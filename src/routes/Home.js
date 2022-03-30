@@ -6,11 +6,11 @@ import { Main } from "../components/styles/Layouts.styled";
 import { Context } from "../Context";
 
 export default function Home() {
-  const { countryData } = useContext(Context);
+  const { allCountries } = useContext(Context);
   const [region, setRegion] = useState("");
   const [searchfield, setSearchfield] = useState("");
 
-  const filteredCountries = countryData.filter((country) => {
+  const filteredCountries = allCountries.filter((country) => {
     return (
       country.name.toLowerCase().includes(searchfield) &&
       country.region.toLowerCase().includes(region)

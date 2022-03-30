@@ -1,5 +1,5 @@
-import { useParams, Link } from "react-router-dom";
-import { useContext } from "react";
+import { useParams, Link, Outlet } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../Context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
@@ -17,56 +17,142 @@ import {
 } from "../components/styles/Details.styled";
 
 export default function Details() {
-  const { currentCountryDetails, matchCountryCode } = useContext(Context);
-  let params = useParams();
-  let country = currentCountryDetails(params.countryName);
+  const { allCountries } = useContext(Context);
+  const { name } = useParams();
+  const [countryDetails, setCountryDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchCountry = async () => {
+      const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+      const data = await res.json();
+      setCountryDetails(
+        data.map((i) => {
+          return {
+            id: i.name.common,
+            name: i.name.common,
+            nativeName: i.name.nativeName,
+            population: i.population,
+            flag: i.flags.svg,
+            region: i.region,
+            subRegion: i.subregion,
+            capital: i.capital,
+            domain: i.tld,
+            currencies: i.currencies,
+            languages: i.languages,
+            borders: i.borders,
+          };
+        })
+      );
+    };
+    fetchCountry();
+  }, [name]);
+
+  const countryCard = countryDetails.map((i) => {
+    const getNativeName = () => {
+      if (!i.nativeName) {
+        return i.name;
+      } else {
+        let nameArray = Object.values(i.nativeName);
+        return nameArray[0].common;
+      }
+    };
+
+    const getLanguages = () => {
+      if (!i.languages) {
+        return "none";
+      } else {
+        const languagesArray = Object.values(i.languages);
+        return languagesArray.toString().replace(/,(?=[^\s])/g, ", ");
+      }
+    };
+
+    const getCurrencies = () => {
+      if (!i.currencies) {
+        return "none";
+      } else {
+        const currenciesArray = Object.values(i.currencies);
+        return String(currenciesArray[0].name)
+          .split(" ")
+          .map((word) => {
+            return word[0].toUpperCase() + word.substring(1);
+          })
+          .join(" ");
+      }
+    };
+
+    const borderNamesArray = i.borders.map((border) => {
+      return matchCountryCode(border);
+    });
+
+    function matchCountryCode(code) {
+      // look through country data and find the coutnry
+      // that matches the country code and then return the country name
+      return allCountries
+        .filter((country) => country.code === code)
+        .map((country) => country.name);
+    }
+
+    const borderBtns = borderNamesArray.map((border) => {
+      return (
+        <PrimaryButton key={border}>
+          <Link to={`/details/${border}`}>{border}</Link>
+        </PrimaryButton>
+      );
+    });
+
+    return (
+      <StyledCountryCard key={i.nativeName}>
+        <Flag src={i.flag} />
+        <CountryFacts>
+          <h2>{i.name}</h2>
+          <SubSection>
+            <p>
+              <strong>Native Name: </strong>
+              {getNativeName()}
+            </p>
+            <p>
+              <strong>Population: </strong>
+              {i.population.toLocaleString("en-US")}
+            </p>
+            <p>
+              <strong>Region: </strong>
+              {i.region}
+            </p>
+            <p>
+              <strong>Sub Region: </strong>
+              {i.subRegion}
+            </p>
+            <p>
+              <strong>Capital: </strong>
+              {i.capital}
+            </p>
+          </SubSection>
+          <SubSection>
+            <p>
+              <strong>Top Level Domain: </strong>
+              {i.domain}
+            </p>
+            <p>
+              <strong>Currencies: </strong>
+              {getCurrencies()}
+            </p>
+            <p>
+              <strong>Languages: </strong>
+              {getLanguages()}
+            </p>
+          </SubSection>
+          <BtnsWrapper>
+            <p>
+              <strong>Border Countries: </strong>
+            </p>
+            <Btns>{borderBtns}</Btns>
+          </BtnsWrapper>
+        </CountryFacts>
+      </StyledCountryCard>
+    );
+  });
 
   // filter down for more specific details: native name, currencies, language, border countries (thank you stackoverflow!)
-  const getCurrencies = () => {
-    if (!country.currencies) {
-      return "none";
-    } else {
-      const currenciesArray = Object.values(country.currencies);
-      return String(currenciesArray[0].name)
-        .split(" ")
-        .map((word) => {
-          return word[0].toUpperCase() + word.substring(1);
-        })
-        .join(" ");
-    }
-  };
-
-  const getNativeName = () => {
-    if (!country.nativeName) {
-      return country.name;
-    } else {
-      let nameArray = Object.values(country.nativeName);
-      return nameArray[0].common;
-    }
-  };
-
-  const getLanguages = () => {
-    if (!country.languages) {
-      return "none";
-    } else {
-      const languagesArray = Object.values(country.languages);
-      return languagesArray.toString().replace(/,(?=[^\s])/g, ", ");
-    }
-  };
-
-  // can i do this when i first get the data...?
-  const borderCountryArray = !country.borderCountries
-    ? ""
-    : Object.values(country.borderCountries).map((country) => {
-        return matchCountryCode(country);
-      });
-
-  const borderCountryBtns =
-    borderCountryArray === ""
-      ? ""
-      : borderCountryArray.map((country) => {
-          return <PrimaryButton key={country}>{country}</PrimaryButton>;
-        });
 
   return (
     <Main>
@@ -78,61 +164,8 @@ export default function Details() {
           </PrimaryButton>
         </Link>
       </StyledSection>
-      <CountriesSection>
-        <StyledCountryCard>
-          <Flag src={country.flag} />
-          <CountryFacts>
-            <h2>{country.name}</h2>
-            <SubSection>
-              <p>
-                <strong>Native Name: </strong>
-                {getNativeName()}
-              </p>
-              <p>
-                <strong>Population: </strong>
-                {country.population.toLocaleString("en-US")}
-              </p>
-              <p>
-                <strong>Region: </strong>
-                {country.region}
-              </p>
-              <p>
-                <strong>Sub Region: </strong>
-                {country.subRegion}
-              </p>
-              <p>
-                <strong>Capital: </strong>
-                {country.capital}
-              </p>
-            </SubSection>
-            <SubSection>
-              <p>
-                <strong>Top Level Domain: </strong>
-                {country.domain}
-              </p>
-              <p>
-                <strong>Currencies: </strong>
-                {getCurrencies()}
-              </p>
-              <p>
-                <strong>Languages: </strong>
-                {getLanguages()}
-              </p>
-            </SubSection>
-            <BtnsWrapper>
-              <p>
-                <strong>Border Countries: </strong>
-              </p>
-
-              <Btns>{borderCountryBtns}</Btns>
-            </BtnsWrapper>
-          </CountryFacts>
-        </StyledCountryCard>
-      </CountriesSection>
+      <CountriesSection>{countryCard}</CountriesSection>
+      <Outlet />
     </Main>
   );
 }
-
-// need a button component
-// grid
-// FLAG / INFO

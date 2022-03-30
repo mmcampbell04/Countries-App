@@ -51,7 +51,8 @@ export default function CountriesList({ filteredCountries }) {
   return (
     <CardsContainer>
       <Loader />
-      {countries.length === 0 ? "No match!" : countries}
+      {countries}
+      {/* {filteredCountries.length === 0 ? "No match!" : countries} */}
     </CardsContainer>
   );
 }

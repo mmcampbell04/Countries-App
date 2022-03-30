@@ -3,32 +3,27 @@ import { useEffect, useState, createContext } from "react";
 const Context = createContext();
 
 function ContextProvider({ children }) {
-  const [countryData, setCountryData] = useState([]);
+  const [allCountries, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // first load
   useEffect(() => {
     setIsLoading(true);
     const fetchCountries = async () => {
       setIsLoading(true);
       const res = await fetch("https://restcountries.com/v3.1/all");
       const data = await res.json();
-      setCountryData(
+      setAllCountries(
         data
           .map((country) => {
             return {
               id: country.name.common,
-              countryCode: country.cca3,
               name: country.name.common,
-              nativeName: country.name.nativeName,
+              code: country.cca3,
               population: country.population,
               flag: country.flags.svg,
               region: country.region,
-              subRegion: country.subregion,
               capital: country.capital,
-              domain: country.tld,
-              currencies: country.currencies,
-              languages: country.languages,
-              borderCountries: country.borders,
             };
           })
           .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
@@ -38,14 +33,10 @@ function ContextProvider({ children }) {
     fetchCountries();
   }, []);
 
-  function currentCountryDetails(name) {
-    return countryData.find((country) => country.name === name);
-  }
-
-  function matchCountryCode(code) {
+  function getBorderCountries(code) {
     // look through country data and find the coutnry
     // that matches the country code and then return the country name
-    return countryData
+    return allCountries
       .filter((country) => country.countryCode === code)
       .map((country) => country.name);
   }
@@ -53,10 +44,9 @@ function ContextProvider({ children }) {
   return (
     <Context.Provider
       value={{
-        countryData,
-        currentCountryDetails,
+        allCountries,
+        getBorderCountries,
         isLoading,
-        matchCountryCode,
       }}
     >
       {children}
