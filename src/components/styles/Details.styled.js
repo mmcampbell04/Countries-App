@@ -66,6 +66,7 @@ export const CountryFacts = styled.div`
 
   @media ${Device.laptop} {
     margin-top: 4em;
+    gap: 2em;
   }
   
   h2 {
@@ -79,13 +80,26 @@ export const CountryFacts = styled.div`
 export const SubSection = styled.div`
   margin-top: 1.5em;
 
+  @media ${Device.laptop} {
+    margin-top: 0;
+  }
+  
+  }
+
   &:first-of-type {
     grid-area: one;
     margin-top: 1em;
+
+    @media ${Device.laptop} {
+    margin-top: 0;
   }
+  
+  }
+
 
   p {
     margin-block: 0.25em;
+        flex: 1 0 auto;
   }
 `;
 
@@ -96,7 +110,7 @@ export const BtnsWrapper = styled(SubSection)`
 
   @media ${Device.tablet} {
     flex-direction: row;
-      align-items: center;
+    align-items: center;
      
     }
 
@@ -108,6 +122,7 @@ export const Btns = styled.div`
 display: flex;
 flex-wrap: wrap;
 margin-top: 0.25em;
+margin-left: 1em;
 
 @media ${Device.tablet} {
   align-items: center;
@@ -124,8 +139,8 @@ button {
     }
 
     @media ${Device.laptop} {
-      align-items: center;
-      margin-left: 0.75em;
+      margin-block: 0.25em;
+      margin-left: 0.25em;
       
     }
 

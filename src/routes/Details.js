@@ -18,12 +18,14 @@ import {
 
 export default function Details() {
   const { allCountries } = useContext(Context);
-  const { name } = useParams();
+  const { countryName } = useParams();
   const [countryDetails, setCountryDetails] = useState([]);
 
   useEffect(() => {
     const fetchCountry = async () => {
-      const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+      const res = await fetch(
+        `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+      );
       const data = await res.json();
       setCountryDetails(
         data.map((i) => {
@@ -45,7 +47,7 @@ export default function Details() {
       );
     };
     fetchCountry();
-  }, [name]);
+  }, [countryName]);
 
   const countryCard = countryDetails.map((i) => {
     const getNativeName = () => {
@@ -80,9 +82,11 @@ export default function Details() {
       }
     };
 
-    const borderNamesArray = i.borders.map((border) => {
-      return matchCountryCode(border);
-    });
+    const borderNamesArray = !i.borders
+      ? ""
+      : i.borders.map((border) => {
+          return matchCountryCode(border);
+        });
 
     function matchCountryCode(code) {
       // look through country data and find the coutnry
@@ -92,16 +96,19 @@ export default function Details() {
         .map((country) => country.name);
     }
 
-    const borderBtns = borderNamesArray.map((border) => {
-      return (
-        <PrimaryButton key={border}>
-          <Link to={`/details/${border}`}>{border}</Link>
-        </PrimaryButton>
-      );
-    });
+    const borderBtns =
+      borderNamesArray === ""
+        ? ""
+        : borderNamesArray.map((border, index) => {
+            return (
+              <PrimaryButton key={index}>
+                <Link to={`/details/${border}`}>{border}</Link>
+              </PrimaryButton>
+            );
+          });
 
     return (
-      <StyledCountryCard key={i.nativeName}>
+      <StyledCountryCard key={i.capital}>
         <Flag src={i.flag} />
         <CountryFacts>
           <h2>{i.name}</h2>
@@ -151,8 +158,6 @@ export default function Details() {
       </StyledCountryCard>
     );
   });
-
-  // filter down for more specific details: native name, currencies, language, border countries (thank you stackoverflow!)
 
   return (
     <Main>
