@@ -109,7 +109,7 @@ export default function Details() {
 
     return (
       <StyledCountryCard key={i.capital}>
-        <Flag src={i.flag} />
+        <Flag src={i.flag} alt="country's flag" />
         <CountryFacts>
           <h2>{i.name}</h2>
           <SubSection>
