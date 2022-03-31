@@ -4,7 +4,11 @@ const Context = createContext();
 
 function ContextProvider({ children }) {
   const [allCountries, setAllCountries] = useState([]);
+  const [region, setRegion] = useState("");
+  const [searchfield, setSearchfield] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(20);
 
   // first load
   useEffect(() => {
@@ -41,12 +45,64 @@ function ContextProvider({ children }) {
       .map((country) => country.name);
   }
 
+  const filteredCountries = allCountries.filter((country) => {
+    return (
+      country.name.toLowerCase().includes(searchfield) &&
+      country.region.toLowerCase().includes(region)
+    );
+  });
+
+  //  search for country
+  function getCountry(filter) {
+    const userSearch = filter.toLowerCase();
+    setSearchfield(userSearch);
+  }
+
+  function getRegion(continent) {
+    setRegion(continent.toLowerCase());
+  }
+
+  // get current cards for page numbers
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // to state but just the [firstcard - lastcards] aka 20 cards
+  const currentCards = filteredCountries.slice(
+    indexOfFirstCard,
+    indexOfLastCard
+  );
+
+  // changePage
+  function flipPages(pageNumber) {
+    setCurrentPage(pageNumber);
+  }
+
+  function toggleNextPage() {
+    if (currentPage < 13) {
+      setCurrentPage((prevCurrentPage) => prevCurrentPage + 1);
+    }
+  }
+
+  function togglePreviousPage() {
+    if (currentPage > 1) {
+      setCurrentPage((prevCurrentPage) => prevCurrentPage - 1);
+    }
+  }
+
   return (
     <Context.Provider
       value={{
         allCountries,
         getBorderCountries,
+        getCountry,
+        getRegion,
+        filteredCountries,
         isLoading,
+        toggleNextPage,
+        togglePreviousPage,
+        flipPages,
+        currentCards,
+        cardsPerPage,
+        currentPage,
       }}
     >
       {children}

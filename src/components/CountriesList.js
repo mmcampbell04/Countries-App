@@ -10,8 +10,8 @@ import {
   CountryDetails,
 } from "./styles/CountriesList.styled";
 
-export default function CountriesList({ filteredCountries }) {
-  const { isLoading } = useContext(Context);
+export default function CountriesList() {
+  const { isLoading, currentCards } = useContext(Context);
 
   const Loader = () => {
     if (isLoading) {
@@ -21,7 +21,7 @@ export default function CountriesList({ filteredCountries }) {
     }
   };
 
-  const countries = filteredCountries.map((country) => {
+  const countries = currentCards.map((country) => {
     return (
       <Card key={country.id}>
         <Link to={`details/${country.name}`}>

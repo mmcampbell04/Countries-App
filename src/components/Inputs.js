@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { Context } from "../Context";
 import {
   StyledInputs,
   InputWrapper,
@@ -16,9 +16,10 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Inputs({ getRegion, resetRegion, onSearchChange }) {
+export default function Inputs() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [headerText, setHeaderText] = useState("Filter by Region");
+  const { getRegion, getCountry } = useContext(Context);
 
   const regionArray = [
     "All",
@@ -53,12 +54,17 @@ export default function Inputs({ getRegion, resetRegion, onSearchChange }) {
     setIsDropdownOpen((prevState) => !prevState);
   }
 
+  function getFilterCountries(e) {
+    let userSearch = e.target.value;
+    getCountry(userSearch);
+  }
+
   return (
     <StyledInputs>
       <InputWrapper>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
         <SearchBar
-          onChange={onSearchChange}
+          onChange={getFilterCountries}
           type="search"
           placeholder="Search for a country..."
         />
