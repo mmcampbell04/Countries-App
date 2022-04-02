@@ -9,7 +9,6 @@ export const CardsContainer = styled.section`
   gap: 1.5em;
 
   @media ${Device.tablet} {
-    margin-top: 0;
     gap: 2em;
   }
 `;
