@@ -18,12 +18,9 @@ function App() {
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <Header theme={theme} themeToggler={themeToggler} />
-
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="/home/:pageNumber" />
-        </Route>
-        <Route exact path="/details/:countryName" element={<Details />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:countryName" element={<Details />} />
         <Route path="*" element={<p>There's nothing here!</p>} />
       </Routes>
     </ThemeProvider>

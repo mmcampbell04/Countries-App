@@ -19,7 +19,7 @@ import {
 export default function Inputs() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [headerText, setHeaderText] = useState("Filter by Region");
-  const { getRegion, getCountry } = useContext(Context);
+  const { getRegion, getCountry, resetPages } = useContext(Context);
 
   const regionArray = [
     "All",
@@ -39,6 +39,7 @@ export default function Inputs() {
   });
 
   function getUserChoice(event) {
+    resetPages();
     const chosenContinent = event.target.innerText;
     if (chosenContinent === "All") {
       getRegion("");

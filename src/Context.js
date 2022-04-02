@@ -8,7 +8,7 @@ function ContextProvider({ children }) {
   const [searchfield, setSearchfield] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(20);
+  const [cardsPerPage] = useState(25);
 
   // first load
   useEffect(() => {
@@ -76,6 +76,10 @@ function ContextProvider({ children }) {
     setCurrentPage(pageNumber);
   }
 
+  function resetPages() {
+    setCurrentPage(1);
+  }
+
   function toggleNextPage() {
     if (currentPage < 13) {
       setCurrentPage((prevCurrentPage) => prevCurrentPage + 1);
@@ -103,6 +107,7 @@ function ContextProvider({ children }) {
         currentCards,
         cardsPerPage,
         currentPage,
+        resetPages,
       }}
     >
       {children}
