@@ -7,4 +7,5 @@ export const Grid = css`
 
 export const Main = styled.main`
   ${Grid}
+  margin-top: 6em;
 `;

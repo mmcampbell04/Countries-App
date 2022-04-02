@@ -8,7 +8,6 @@ export const StyledInputs = styled.section`
   flex-direction: column;
 
   @media ${Device.tablet} {
-    margin-block: 3.5em;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;

@@ -3,6 +3,10 @@ import { Grid } from "./Layouts.styled";
 // import { Device } from "./Device";
 
 export const StyledHeader = styled.header`
+position: fixed;
+top: 0;
+width: 100%
+overflow: hidden;
   ${Grid}
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.accentColor};
