@@ -9,3 +9,9 @@ export const Main = styled.main`
   ${Grid}
   margin-top: 6em;
 `;
+
+export const StyledDiv = styled.div`
+  grid-column: 2;
+  place-self: center;
+  padding-block: 10em;
+`;
