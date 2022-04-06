@@ -8,7 +8,7 @@ function ContextProvider({ children }) {
   const [searchfield, setSearchfield] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(25);
+  const [cardsPerPage] = useState(24);
 
   // first load
   useEffect(() => {

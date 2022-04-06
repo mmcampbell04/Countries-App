@@ -1,14 +1,16 @@
+import { useContext } from "react";
+import { Context } from "../Context";
+import { Loader } from "../components/Loader";
 import Inputs from "../components/Inputs";
 import CountriesList from "../components/CountriesList";
-import Pagination from "../components/Pagination";
 import { Main } from "../components/styles/Layouts.styled";
 
 export default function Home() {
+  const { isLoading } = useContext(Context);
   return (
     <Main>
       <Inputs />
-      <CountriesList />
-      <Pagination />
+      {isLoading ? <Loader /> : <CountriesList />}
     </Main>
   );
 }

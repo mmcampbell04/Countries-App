@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { Device } from "./Device";
 
-export const CardsContainer = styled.section`
+export const ListSection = styled.section`
   margin-top: 3em;
   grid-column: 2 / -2;
+`;
+
+export const CountriesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1.5em;

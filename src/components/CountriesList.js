@@ -1,25 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../Context";
-// import Details from "../routes/Details";
+import Pagination from "../components/Pagination";
 
 import {
-  CardsContainer,
+  ListSection,
+  CountriesWrapper,
   Card,
   CountryFlag,
   CountryDetails,
 } from "./styles/CountriesList.styled";
 
 export default function CountriesList() {
-  const { isLoading, currentCards } = useContext(Context);
-
-  const Loader = () => {
-    if (isLoading) {
-      return <h2>Content Loading!</h2>;
-    } else {
-      return null;
-    }
-  };
+  const { currentCards } = useContext(Context);
 
   const countries = currentCards.map((country) => {
     return (
@@ -49,10 +42,9 @@ export default function CountriesList() {
   });
 
   return (
-    <CardsContainer>
-      <Loader />
-      {countries}
-      {/* {filteredCountries.length === 0 ? "No match!" : countries} */}
-    </CardsContainer>
+    <ListSection>
+      <CountriesWrapper>{countries}</CountriesWrapper>
+      <Pagination />
+    </ListSection>
   );
 }
