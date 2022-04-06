@@ -6,6 +6,7 @@ import GlobalStyles from "./components/styles/Globals.styles";
 import Header from "./components/Header";
 import Home from "./routes/Home";
 import Details from "./routes/Details";
+import Error from "./routes/Error";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -21,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/details/:countryName" element={<Details />} />
-        <Route path="*" element={<p>There's nothing here!</p>} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </ThemeProvider>
   );
