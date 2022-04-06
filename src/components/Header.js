@@ -2,8 +2,7 @@
 import {
   StyledHeader,
   HeaderWrapper,
-  Checkbox,
-  CheckboxLabel,
+  ThemeButton,
 } from "./styles/Header.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
@@ -14,18 +13,10 @@ export default function Header({ theme, themeToggler }) {
     <StyledHeader>
       <HeaderWrapper>
         <h1>Where in the world?</h1>
-        <div className="darkmode toggle">
-          <Checkbox
-            type="checkbox"
-            id="themeSwitch"
-            name="theme"
-            onChange={themeToggler}
-          />
-          <CheckboxLabel htmlFor="themeSwitch">
-            <FontAwesomeIcon icon={theme === "light" ? faMoonLight : faMoon} />
-            Dark Mode
-          </CheckboxLabel>
-        </div>
+        <ThemeButton tabIndex={0} onClick={themeToggler}>
+          <FontAwesomeIcon icon={theme === "light" ? faMoonLight : faMoon} />
+          Dark Mode
+        </ThemeButton>
       </HeaderWrapper>
     </StyledHeader>
   );

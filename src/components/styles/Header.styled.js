@@ -3,10 +3,10 @@ import { Grid } from "./Layouts.styled";
 // import { Device } from "./Device";
 
 export const StyledHeader = styled.header`
-position: fixed;
-top: 0;
-width: 100%
-overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
   ${Grid}
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.accentColor};
@@ -27,7 +27,7 @@ export const HeaderWrapper = styled.div`
   padding-block: 1em;
 `;
 
-export const CheckboxLabel = styled.label`
+export const ThemeButton = styled.button`
   width: 7em;
   display: flex;
   justify-content: space-between;
@@ -35,9 +35,8 @@ export const CheckboxLabel = styled.label`
   padding: 5px;
   cursor: pointer;
   font-size: clamp(0.75rem, 75% + 2px, 1rem);
-`;
 
-export const Checkbox = styled.input`
-  opacity: 0;
-  position: absolute;
+  &:focus-within {
+    outline: 3px dotted green;
+  }
 `;
