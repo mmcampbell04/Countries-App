@@ -35,6 +35,7 @@ export const ThemeButton = styled.button`
   padding: 5px;
   cursor: pointer;
   font-size: clamp(0.75rem, 75% + 2px, 1rem);
+  color: ${({ theme }) => theme.textColor};
 
   &:focus-within {
     outline: 3px dotted green;
