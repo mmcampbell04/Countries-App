@@ -20,8 +20,9 @@ function App() {
       <GlobalStyles />
       <Header theme={theme} themeToggler={themeToggler} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/details/:countryName" element={<Details />} />
+        <Route path="/Countries-App" exact element={<Home />} />
+        <Route path="/Countries-App/:countryName" exact element={<Details />} />
+
         <Route path="*" element={<Error />} />
       </Routes>
     </ThemeProvider>

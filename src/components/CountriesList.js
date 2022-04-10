@@ -18,7 +18,7 @@ export default function CountriesList() {
   const countries = currentCards.map((country) => {
     return (
       <Card key={country.id}>
-        <Link to={`details/${country.name}`}>
+        <Link to={`/Countries-App/${country.name}`}>
           <CountryFlag src={country.flag} alt="country's flag" />
           <CountryDetails>
             <h2>{country.name}</h2>

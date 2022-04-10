@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import { Context } from "../Context";
 import { Loader } from "../components/Loader";
 import Inputs from "../components/Inputs";
@@ -10,7 +11,13 @@ export default function Home() {
   return (
     <Main>
       <Inputs />
-      {isLoading ? <Loader /> : <CountriesList />}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <CountriesList>
+          <Outlet />
+        </CountriesList>
+      )}
     </Main>
   );
 }
