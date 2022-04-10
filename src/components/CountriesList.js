@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../Context";
 import Pagination from "../components/Pagination";
+import Error from "../routes/Error";
 
 import {
   ListSection,
@@ -18,7 +19,7 @@ export default function CountriesList() {
     return (
       <Card key={country.id}>
         <Link to={`details/${country.name}`}>
-          <CountryFlag src={country.flag} />
+          <CountryFlag src={country.flag} alt="country's flag" />
           <CountryDetails>
             <h2>{country.name}</h2>
             <p>
@@ -43,8 +44,12 @@ export default function CountriesList() {
 
   return (
     <ListSection>
-      <CountriesWrapper>{countries}</CountriesWrapper>
-      <Pagination />
+      {countries.length === 0 ? (
+        <Error />
+      ) : (
+        <CountriesWrapper>{countries}</CountriesWrapper>
+      )}
+      {countries.length > 1 && <Pagination />}
     </ListSection>
   );
 }
