@@ -99,7 +99,9 @@ export const SubSection = styled.div`
 
   p {
     margin-block: 0.25em;
-        flex: 1 0 auto;
+    flex: 0.1 0 16ch;
+    font-weight: 700;
+        
   }
 `;
 

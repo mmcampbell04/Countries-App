@@ -102,7 +102,7 @@ export default function Details() {
         : borderNamesArray.map((border, index) => {
             return (
               <PrimaryButton key={index}>
-                <Link to={`/details/${border}`}>{border}</Link>
+                <Link to={`/Countries-App/${border}`}>{border}</Link>
               </PrimaryButton>
             );
           });
@@ -149,9 +149,7 @@ export default function Details() {
             </p>
           </SubSection>
           <BtnsWrapper>
-            <p>
-              <strong>Border Countries: </strong>
-            </p>
+            <p>Border Countries:</p>
             <Btns>{borderBtns}</Btns>
           </BtnsWrapper>
         </CountryFacts>
