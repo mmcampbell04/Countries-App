@@ -97,12 +97,7 @@ export const SubSection = styled.div`
   }
 
 
-  p {
-    margin-block: 0.25em;
-    flex: 0.1 0 16ch;
-    font-weight: 700;
-        
-  }
+ 
 `;
 
 export const BtnsWrapper = styled(SubSection)`
@@ -115,6 +110,13 @@ export const BtnsWrapper = styled(SubSection)`
     align-items: center;
      
     }
+
+     p {
+    margin-block: 0.25em;
+    flex: 0.1 0 16ch;
+    font-weight: 700;
+        
+  }
 
 
   }

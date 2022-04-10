@@ -150,7 +150,7 @@ export default function Details() {
           </SubSection>
           <BtnsWrapper>
             <p>Border Countries:</p>
-            <Btns>{borderBtns}</Btns>
+            {borderNamesArray.length > 0 ? <Btns>{borderBtns}</Btns> : "None"}
           </BtnsWrapper>
         </CountryFacts>
       </StyledCountryCard>
