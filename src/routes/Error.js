@@ -5,8 +5,7 @@ import { faPlaneSlash } from "@fortawesome/free-solid-svg-icons";
 export default function Error() {
   return (
     <StyledDiv>
-      <FontAwesomeIcon icon={faPlaneSlash} />
-      <p>There's nothing here!</p>
+      <FontAwesomeIcon icon={faPlaneSlash} size="5x" />
     </StyledDiv>
   );
 }

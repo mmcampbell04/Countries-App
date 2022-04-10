@@ -12,6 +12,6 @@ export const Main = styled.main`
 
 export const StyledDiv = styled.div`
   grid-column: 2;
-  place-self: center;
+  text-align: center;
   padding-block: 10em;
 `;
