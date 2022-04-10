@@ -25,8 +25,9 @@ Users should be able to:
 
 ### Built with
 
-- [React](https://reactjs.org/) - JS library
-- [Styled Components](https://styled-components.com/) - For styles
+- [React](https://reactjs.org/)
+- [Styled Components](https://styled-components.com/)
+- [React Router V6](https://reactrouter.com/)
 
 ### Extras
 
@@ -35,8 +36,7 @@ Users should be able to:
 
 ### What I learned
 
-- This was the first time using Styled Components, there is likely still some refactoring to go
-- The logic behind the pages component
+This was the first time using Styled Components and React Router. There's probably some refactoring for the styles that can be done and React Router with Github pages deployment took some to figure out the routes needed!
 
 ### Future Plans/Further Adaptions
 
