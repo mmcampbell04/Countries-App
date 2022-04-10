@@ -5,8 +5,7 @@ import {
   InputWrapper,
   SearchBar,
   DropdownContainer,
-  DropdownHeader,
-  DropdownListContainer,
+  DropdownButton,
   DropdownList,
   ListItem,
 } from "./styles/Inputs.styled";
@@ -52,7 +51,7 @@ export default function Inputs() {
 
   // open dropdown
   function toggleDropdown() {
-    setIsDropdownOpen((prevState) => !prevState);
+    setIsDropdownOpen(!isDropdownOpen);
   }
 
   function getFilterCountries(e) {
@@ -71,20 +70,15 @@ export default function Inputs() {
         />
       </InputWrapper>
       <DropdownContainer>
-        <DropdownHeader onClick={toggleDropdown}>
+        <DropdownButton onClick={toggleDropdown}>
           {headerText}
           <FontAwesomeIcon
             icon={faAngleDown}
             rotation={isDropdownOpen ? 180 : 0}
             size="sm"
           />
-        </DropdownHeader>
-
-        {isDropdownOpen && (
-          <DropdownListContainer>
-            <DropdownList>{regions}</DropdownList>
-          </DropdownListContainer>
-        )}
+        </DropdownButton>
+        {isDropdownOpen && <DropdownList>{regions}</DropdownList>}
       </DropdownContainer>
     </StyledInputs>
   );
