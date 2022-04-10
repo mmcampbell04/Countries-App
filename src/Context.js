@@ -4,8 +4,8 @@ const Context = createContext();
 
 function ContextProvider({ children }) {
   const [allCountries, setAllCountries] = useState([]);
-  const [region, setRegion] = useState("");
-  const [searchfield, setSearchfield] = useState("");
+  const [regionFilter, setRegionFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(24);
@@ -47,19 +47,19 @@ function ContextProvider({ children }) {
 
   const filteredCountries = allCountries.filter((country) => {
     return (
-      country.name.toLowerCase().includes(searchfield) &&
-      country.region.toLowerCase().includes(region)
+      country.name.toLowerCase().includes(countryFilter) &&
+      country.region.toLowerCase().includes(regionFilter)
     );
   });
 
   //  search for country
   function getCountry(filter) {
     const userSearch = filter.toLowerCase();
-    setSearchfield(userSearch);
+    setCountryFilter(userSearch);
   }
 
   function getRegion(continent) {
-    setRegion(continent.toLowerCase());
+    setRegionFilter(continent.toLowerCase());
   }
 
   // get current cards for page numbers
