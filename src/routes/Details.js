@@ -162,7 +162,7 @@ export default function Details() {
   return (
     <Main>
       <StyledSection>
-        <Link to="/">
+        <Link to={-1}>
           <PrimaryButton>
             <FontAwesomeIcon icon={faArrowLeftLong} size="lg" />
             Back
