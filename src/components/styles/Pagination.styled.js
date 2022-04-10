@@ -5,7 +5,7 @@ export const PaginationContainer = styled.nav`
   grid-column: 2/-2;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 export const Arrow = styled.a`
@@ -13,7 +13,8 @@ export const Arrow = styled.a`
 `;
 
 export const Pages = styled.ul`
-  font-size: 0.75rem;
+  margin-inline: 4em;
+  font-size: 0.9rem;
   display: flex;
   max-width: 100%;
 `;
@@ -21,6 +22,7 @@ export const Pages = styled.ul`
 export const Page = styled.li`
   display: grid;
   place-content: center;
+  cursor: pointer;
 `;
 
 export const PageLink = styled.a`
