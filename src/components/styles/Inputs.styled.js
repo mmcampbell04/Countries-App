@@ -57,21 +57,32 @@ export const DropdownContainer = styled.div`
   }
 `;
 
-export const DropdownHeader = styled(InputWrapper)`
+export const DropdownButton = styled.button`
   width: 100%;
+  max-width: 25em;
+  display: flex;
   justify-content: space-between;
-`;
+  align-items: center;
+  padding: 1em 1.75em;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.accentColor};
+  color: ${({ theme }) => theme.textColor};
+  font-size: clamp(0.875rem, 50% + 4px, 1rem)
+  font-weight: 500;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 15%);
 
-export const DropdownListContainer = styled.div`
-  width: 13em;
-  position: absolute;
-  z-index: 1000;
-  margin-top: 0.5em;
+  &:focus-within {
+    outline: 3px dotted green;
+  }
 `;
 
 export const DropdownList = styled.ul`
   background-color: ${({ theme }) => theme.accentColor};
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  width: 13em;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 0.5em;
 `;
 export const ListItem = styled.li`
   font-weight: 300;
@@ -83,7 +94,12 @@ export const ListItem = styled.li`
   }
 
   &:hover,
-  :focus {
+  :focus,
+  :active {
+    background-color: ${({ theme }) => theme.accentColorSecondary};
+  }
+
+  &[aria-selected="true"] {
     background-color: ${({ theme }) => theme.accentColorSecondary};
   }
 `;
