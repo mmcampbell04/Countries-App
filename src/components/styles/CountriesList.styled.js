@@ -8,10 +8,11 @@ export const ListSection = styled.section`
 
 export const CountriesWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 0.5fr));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1.5em;
 
   @media ${Device.tablet} {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 0.5fr));
     gap: 2em;
   }
 `;

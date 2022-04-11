@@ -111,13 +111,16 @@ export const BtnsWrapper = styled(SubSection)`
      
     }
 
-     p {
+  p {
     margin-block: 0.25em;
-    flex: 0.1 0 16ch;
+    
     font-weight: 700;
-        
-  }
 
+     @media ${Device.tablet} {
+    flex: 0.1 0 16ch;
+     
+    } 
+  }
 
   }
 `;
@@ -126,10 +129,11 @@ export const Btns = styled.div`
 display: flex;
 flex-wrap: wrap;
 margin-top: 0.25em;
-margin-left: 1em;
+
 
 @media ${Device.tablet} {
   align-items: center;
+  margin-left: 1em;
     }
 
 button {
